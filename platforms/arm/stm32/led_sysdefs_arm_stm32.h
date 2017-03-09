@@ -37,8 +37,8 @@
 #endif
 
 // data type defs
-typedef volatile       uint8_t RoReg; /**< Read only 8-bit register (volatile const unsigned int) */
-typedef volatile       uint8_t RwReg; /**< Read-Write 8-bit register (volatile unsigned int) */
+typedef volatile       uint8_t RoReg8; /**< Read only 8-bit register (volatile const unsigned int) */
+typedef volatile       uint8_t RwReg8; /**< Read-Write 8-bit register (volatile unsigned int) */
 
 #define FASTLED_NO_PINMAP
 

@@ -31,21 +31,21 @@ public:
 #if !defined(FASTLED_NO_PINMAP)
 
 class Pin : public Selectable {
-	volatile RwReg *mPort;
-	volatile RoReg *mInPort;
-	RwReg mPinMask;
+	volatile RwReg8 *mPort;
+	volatile RoReg8 *mInPort;
+	RwReg8 mPinMask;
 	uint8_t mPin;
 
 	void _init() {
 		mPinMask = digitalPinToBitMask(mPin);
-		mPort = (volatile RwReg*)portOutputRegister(digitalPinToPort(mPin));
-		mInPort = (volatile RoReg*)portInputRegister(digitalPinToPort(mPin));
+		mPort = (volatile RwReg8*)portOutputRegister(digitalPinToPort(mPin));
+		mInPort = (volatile RoReg8*)portInputRegister(digitalPinToPort(mPin));
 	}
 public:
 	Pin(int pin) : mPin(pin) { _init(); }
 
-	typedef volatile RwReg * port_ptr_t;
-	typedef RwReg port_t;
+	typedef volatile RwReg8 * port_ptr_t;
+	typedef RwReg8 port_t;
 
 	inline void setOutput() { pinMode(mPin, OUTPUT); }
 	inline void setInput() { pinMode(mPin, INPUT); }
@@ -86,9 +86,9 @@ public:
 // This is the empty code version of the raw pin class, method bodies should be filled in to Do The Right Thing[tm] when making this
 // available on a new platform
 class Pin : public Selectable {
-	volatile RwReg *mPort;
-	volatile RoReg *mInPort;
-	RwReg mPinMask;
+	volatile RwReg8 *mPort;
+	volatile RoReg8 *mInPort;
+	RwReg8 mPinMask;
 	uint8_t mPin;
 
 	void _init() {
@@ -102,8 +102,8 @@ public:
 
 	void setPin(int pin) { mPin = pin; _init(); }
 
-	typedef volatile RwReg * port_ptr_t;
-	typedef RwReg port_t;
+	typedef volatile RwReg8 * port_ptr_t;
+	typedef RwReg8 port_t;
 
 	inline void setOutput() { /* TODO: Set pin output */ }
 	inline void setInput() { /* TODO: Set pin input */ }
@@ -158,9 +158,9 @@ public:
 /// as passing Pin objects around will likely -not- have the effect you're expecting.
 #ifdef FASTLED_FORCE_SOFTWARE_PINS
 template<uint8_t PIN> class FastPin {
-	static RwReg sPinMask;
-	static volatile RwReg *sPort;
-	static volatile RoReg *sInPort;
+	static RwReg8 sPinMask;
+	static volatile RwReg8 *sPort;
+	static volatile RoReg8 *sInPort;
 	static void _init() {
 #if !defined(FASTLED_NO_PINMAP)
 		sPinMask = digitalPinToBitMask(PIN);
@@ -169,8 +169,8 @@ template<uint8_t PIN> class FastPin {
 #endif
 	}
 public:
-	typedef volatile RwReg * port_ptr_t;
-	typedef RwReg port_t;
+	typedef volatile RwReg8 * port_ptr_t;
+	typedef RwReg8 port_t;
 
 	inline static void setOutput() { _init(); pinMode(PIN, OUTPUT); }
 	inline static void setInput() { _init(); pinMode(PIN, INPUT); }
@@ -194,9 +194,9 @@ public:
 	static port_t mask() __attribute__ ((always_inline)) { return sPinMask; }
 };
 
-template<uint8_t PIN> RwReg FastPin<PIN>::sPinMask;
-template<uint8_t PIN> volatile RwReg *FastPin<PIN>::sPort;
-template<uint8_t PIN> volatile RoReg *FastPin<PIN>::sInPort;
+template<uint8_t PIN> RwReg8 FastPin<PIN>::sPinMask;
+template<uint8_t PIN> volatile RwReg8 *FastPin<PIN>::sPort;
+template<uint8_t PIN> volatile RoReg8 *FastPin<PIN>::sInPort;
 
 #else
 
@@ -208,8 +208,8 @@ template<uint8_t PIN> class FastPin {
 	static void _init() {
 	}
 public:
-	typedef volatile RwReg * port_ptr_t;
-	typedef RwReg port_t;
+	typedef volatile RwReg8 * port_ptr_t;
+	typedef RwReg8 port_t;
 
 	inline static void setOutput() { }
 	inline static void setInput() { }

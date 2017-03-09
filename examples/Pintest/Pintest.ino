@@ -72,8 +72,8 @@ template<uint8_t PIN> void CheckPin()
 {
 	CheckPin<PIN - 1>();
 
-	RwReg *systemThinksPortIs = portOutputRegister(digitalPinToPort(PIN));
-	RwReg systemThinksMaskIs = digitalPinToBitMask(PIN);
+	RwReg8 *systemThinksPortIs = portOutputRegister(digitalPinToPort(PIN));
+	RwReg8 systemThinksMaskIs = digitalPinToBitMask(PIN);
 	
 	Serial.print("Pin "); Serial.print(PIN); Serial.print(": Port ");
 	

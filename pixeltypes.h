@@ -361,9 +361,9 @@ struct CRGB {
     /// may dim all the way to 100% black.
     inline CRGB& nscale8 (const CRGB & scaledown )
     {
-        r = ::scale8(r, scaledown.r);
-        g = ::scale8(g, scaledown.g);
-        b = ::scale8(b, scaledown.b);
+        r = NSFastLED::scale8(r, scaledown.r);
+        g = NSFastLED::scale8(g, scaledown.g);
+        b = NSFastLED::scale8(b, scaledown.b);
         return *this;
     }
 
@@ -371,9 +371,9 @@ struct CRGB {
     inline CRGB scale8 (const CRGB & scaledown ) const
     {
         CRGB out;
-        out.r = ::scale8(r, scaledown.r);
-        out.g = ::scale8(g, scaledown.g);
-        out.b = ::scale8(b, scaledown.b);
+        out.r = NSFastLED::scale8(r, scaledown.r);
+        out.g = NSFastLED::scale8(g, scaledown.g);
+        out.b = NSFastLED::scale8(b, scaledown.b);
         return out;
     }
 
